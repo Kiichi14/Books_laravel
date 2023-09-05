@@ -29,6 +29,11 @@ Route::post('editions/add', [EditionsController::class, 'store']);
 Route::resource('book_editions', BookEditionsController::class);
 Route::get('book/editions/{id}', [BookEditionsController::class, 'findAllBookEdition']);
 
+/* route de recherche */
+Route::get('book/author/{id}', [BooksController::class, 'searchByauthor']);
+Route::get('book/category/{id}', [BooksController::class, 'searchByCategory']);
+Route::get('book/editor/{id}', [BooksController::class, 'searchByEditor']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

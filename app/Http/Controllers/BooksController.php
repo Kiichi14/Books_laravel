@@ -12,13 +12,13 @@ class BooksController extends Controller
 
         $books = Books::with('category', 'editor', 'author')->get();
 
-        /*return response()->json([
+        return response()->json([
             'status_code' => 200,
             'status_message' => 'Touts les livres',
             'livres' => $books
-        ]);*/
+        ]);
 
-        return view('dashboard', ['books' => $books]);
+        //return view('dashboard', ['books' => $books]);
 
     }
 
@@ -51,6 +51,44 @@ class BooksController extends Controller
             'status_code' => 200,
             'status_message' => 'Votre livre a bien été ajouté',
             'livre' => $book
+        ]);
+
+    }
+
+    /* Méthode de recherche */
+
+    public function searchByauthor($idAuthor) {
+
+        $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('author_id', $idAuthor)->get();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Touts les livres de l\'auteur',
+            'livre' => $books
+        ]);
+
+    }
+
+    public function searchByCategory($idCategory) {
+
+        $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('category_id', $idCategory)->get();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Touts les livres de cette catégorie',
+            'livre' => $books
+        ]);
+
+    }
+
+    public function searchByEditor($idEditor) {
+
+        $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('editor_id', $idEditor)->get();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Touts les livres de cette éditeur',
+            'livre' => $books
         ]);
 
     }
