@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Category;
+use App\Models\Editor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Books extends Model
 {
@@ -31,5 +34,10 @@ class Books extends Model
     public function author(): HasOne
     {
         return $this->hasOne(Author::class, 'id', 'author_id');
+    }
+
+    public function editions(): HasMany
+    {
+        return $this->hasMany(BookEditions::class, 'book_id', 'id');
     }
 }
