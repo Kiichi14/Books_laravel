@@ -10,6 +10,14 @@ class Books extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'category_id',
+        'author_id',
+        'editor_id'
+    ];
+
     public function category(): HasOne
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
