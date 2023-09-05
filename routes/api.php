@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\EditionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('test', BooksController::class);
+/* Controle des livres */
+Route::resource('books', BooksController::class);
+
+/* Controle des editions */
+Route::get('editions/all', [EditionsController::class, 'index']);
+Route::get('editions/{id}', [EditionsController::class, 'find']);
+Route::post('editions/add', [EditionsController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
