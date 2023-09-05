@@ -1,0 +1,22 @@
+.list-book-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.list-book-card {
+    background: white;
+    color: black;
+    border-radius: 6px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.list-book-meta {
+    display: flex;
+    gap: 10px;
+}

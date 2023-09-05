@@ -12,11 +12,13 @@ class BooksController extends Controller
 
         $books = Books::with('category', 'editor', 'author')->get();
 
-        return response()->json([
+        /*return response()->json([
             'status_code' => 200,
             'status_message' => 'Touts les livres',
             'livres' => $books
-        ]);
+        ]);*/
+
+        return view('dashboard', ['books' => $books]);
 
     }
 
@@ -43,9 +45,11 @@ class BooksController extends Controller
         $book->author_id = $input['author_id'];
         $book->editor_id = $input['editor_id'];
 
+        $book->save();
+
         return response()->json([
             'status_code' => 200,
-            'status_message' => 'Votre livre a bine été ajouté',
+            'status_message' => 'Votre livre a bien été ajouté',
             'livre' => $book
         ]);
 

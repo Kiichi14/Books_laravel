@@ -5,13 +5,27 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
+    <div class="list-book-container">
+        @foreach ($books as $book)
+            <div class="list-book-card">
+                <div class="list-book-title">
+                    <p>{{ $book->title }}</p>
+                </div>
+                <div class="list-book-resume">
+                    <p>{{ $book->resume }}</p>
+                </div>
+                <div class="list-book-meta">
+                    <div class="list-book-author">
+                        <p>{{ $book->author->name_author }}</p>
+                    </div>
+                    <div class="list-book-category">
+                        {{ $book->category->name_category }}
+                    </div>
+                    <div class="list-book-editor">
+                        {{ $book->editor->name_editor }}
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 </x-app-layout>
