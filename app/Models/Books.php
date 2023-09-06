@@ -40,4 +40,9 @@ class Books extends Model
     {
         return $this->hasMany(BookEditions::class, 'book_id', 'id');
     }
+
+    public function rate(): HasMany
+    {
+        return $this->hasMany(Comments::class, 'id', 'book_id');
+    }
 }
