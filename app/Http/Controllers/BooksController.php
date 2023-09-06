@@ -55,6 +55,38 @@ class BooksController extends Controller
 
     }
 
+    public function update(CreateBooksRequest $request, $id) {
+
+        $input = $request->all();
+
+        $book = Books::where('id', $id)->update([
+            'title' => $input['title'],
+            'resume' => $input['resume'],
+            'category_id' => $input['category_id'],
+            'author_id' => $input['author_id'],
+            'editor_id' => $input['editor_id']
+        ]);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre livre a bien été mis a jour',
+            'book' => $book
+        ]);
+
+    }
+
+    public function destroy($id) {
+
+        $book = Books::where('id', $id)->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre livre a bien été supprimer',
+            'book' => $book
+        ]);
+
+    }
+
     /* Méthode de recherche */
 
     public function searchByauthor($idAuthor) {
