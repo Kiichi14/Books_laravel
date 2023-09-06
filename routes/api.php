@@ -8,6 +8,7 @@ use App\Http\Controllers\BookEditionsController;
 use App\Http\Controllers\LibrairyController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\ReadingStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,9 @@ Route::resource('wishlist', WishlistController::class);
 
 /* Controle des commentaires */
 Route::resource('comments', CommentsController::class);
+
+/* Controle des status de lecture */
+Route::resource('readingstatus', ReadingStatusController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
