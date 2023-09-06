@@ -22,8 +22,7 @@ class LibrairyController extends Controller
 
         return response()->json([
             'status_code' => 200,
-            'status_message' => 'Votre livre a bien été ajouté a votre bibliothéque',
-            'bibliothéque' => $librairy
+            'status_message' => 'Votre livre a bien été ajouté a votre bibliothéque'
         ]);
 
     }

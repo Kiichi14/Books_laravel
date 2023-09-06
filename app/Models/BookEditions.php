@@ -24,4 +24,9 @@ class BookEditions extends Model
     {
         return $this->hasMany(Librairy::class, 'edition_id', 'id');
     }
+
+    public function wishlist(): HasMany
+    {
+        return $this->hasMany(Wishlist::class, 'edition_id', 'id');
+    }
 }

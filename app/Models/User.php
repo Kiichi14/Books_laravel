@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Librairy::class, 'user_id', 'id');
     }
+
+    public function wishlist(): HasOne
+    {
+        return $this->hasOne(Wishlist::class, 'user_id', 'id');
+    }
 }

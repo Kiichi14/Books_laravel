@@ -6,6 +6,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\EditionsController;
 use App\Http\Controllers\BookEditionsController;
 use App\Http\Controllers\LibrairyController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,9 @@ Route::get('book/editor/{id}', [BooksController::class, 'searchByEditor']);
 
 /* Controle des bibliothéque */
 Route::resource('librairy', LibrairyController::class);
+
+/* Controle de la wishlist */
+Route::resource('wishlist', WishlistController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

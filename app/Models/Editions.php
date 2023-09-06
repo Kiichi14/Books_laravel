@@ -15,4 +15,5 @@ class Editions extends Model
     {
         return $this->hasMany(BookEditions::class, 'edition_id', 'id');
     }
+    
 }
