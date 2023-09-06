@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BookEditions extends Model
 {
@@ -17,5 +18,10 @@ class BookEditions extends Model
     public function editions()
     {
         return $this->belongsTo(Editions::class, 'edition_id', 'id');
+    }
+
+    public function librairy(): HasMany
+    {
+        return $this->hasMany(Librairy::class, 'edition_id', 'id');
     }
 }

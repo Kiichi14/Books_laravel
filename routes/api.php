@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\EditionsController;
 use App\Http\Controllers\BookEditionsController;
+use App\Http\Controllers\LibrairyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::get('book/editions/{id}', [BookEditionsController::class, 'findAllBookEdi
 Route::get('book/author/{id}', [BooksController::class, 'searchByauthor']);
 Route::get('book/category/{id}', [BooksController::class, 'searchByCategory']);
 Route::get('book/editor/{id}', [BooksController::class, 'searchByEditor']);
+
+/* Controle des bibliothéque */
+Route::resource('librairy', LibrairyController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
