@@ -42,4 +42,15 @@ class WishlistController extends Controller
         ]);
     }
 
+    public function destroy($id) {
+
+        $wishlist = Wishlist::where('edition_id', $id)->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre livre a bien été supprimer de votre wishlist'
+        ]);
+
+    }
+
 }

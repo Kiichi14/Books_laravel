@@ -53,6 +53,35 @@ class BookEditionsController extends Controller
 
     }
 
+    public function update(BookEditionsRequest $request, $id) {
+
+        $input = $request->all();
+
+        $bookEdition = BookEditions::where('id', $id)->update([
+            'book_id' => $input['book_id'],
+            'edition_id' => $input['edition_id']
+        ]);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre édition a bien été mis a jour',
+            'book' => $bookEdition
+        ]);
+
+    }
+
+    public function destroy($id) {
+
+        $bookEdition = BookEditions::where('id', $id)->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre livre a bien été supprimer',
+        ]);
+
+
+    }
+
     public function findAllBookEdition($id) {
 
         $booksEditions = BookEditions::with('book','book.author','book.category', 'editions')

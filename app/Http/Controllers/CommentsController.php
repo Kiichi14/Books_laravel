@@ -63,4 +63,23 @@ class CommentsController extends Controller
 
     }
 
+    public function update(CommentsRequest $request, $id) {
+
+        $input = $request->all();
+
+        $comment = Comments::where('id', $id)->update([
+            'comment' => $input['comment'],
+            'rate' => $input['rate'],
+            'user_id' => $input['user_id'],
+            'book_id' => $input['book_id']
+        ]);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Votre commentaire a bien été mis a jour',
+            'book' => $comment
+        ]);
+
+    }
+
 }
