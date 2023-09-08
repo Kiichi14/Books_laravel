@@ -9,6 +9,7 @@ use App\Http\Controllers\LibrairyController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ReadingStatusController;
+use App\Http\Controllers\UserApiAuthetification;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,10 @@ use App\Http\Controllers\ReadingStatusController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+/* Route d'authentification */
+Route::post('register', [UserApiAuthetification::class, 'store']);
+Route::post('login', [UserApiAuthetification::class, 'login']);
 
 /* Controle des livres */
 Route::resource('books', BooksController::class);
@@ -50,7 +55,9 @@ Route::resource('comments', CommentsController::class);
 /* Controle des status de lecture */
 Route::resource('readingstatus', ReadingStatusController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::get('users', [UserApiAuthetification::class, 'show']);
+    Route::get('logout', [UserApiAuthetification::class, 'logout']);
 });
+
 
