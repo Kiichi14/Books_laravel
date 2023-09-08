@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\LogUserRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserApiAuthetification extends Controller
@@ -84,7 +86,8 @@ class UserApiAuthetification extends Controller
             'status_code' => 200,
             'status_message' => 'Utilisateur en cours',
             'user' => $request->user(),
-            'token' => request()->bearerToken()
+            'token' => request()->bearerToken(),
+            'role' => Auth::user()->role
         ]);
 
 

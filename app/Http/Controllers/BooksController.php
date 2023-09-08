@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Http\Requests\CreateBooksRequest;
+use Closure;
 
 class BooksController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('checkrole:admin')->except(['index', 'show', 'searchByauthor', 'searchByEditor']);
+    }
+
     public function index() {
 
         $books = Books::with('category', 'editor', 'author')->get();
@@ -17,8 +23,6 @@ class BooksController extends Controller
             'status_message' => 'Touts les livres',
             'livres' => $books
         ]);
-
-        //return view('dashboard', ['books' => $books]);
 
     }
 
