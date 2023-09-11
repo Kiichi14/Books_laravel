@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Books;
 use App\Http\Requests\CreateBooksRequest;
-use Closure;
 
 class BooksController extends Controller
 {
@@ -16,24 +15,43 @@ class BooksController extends Controller
 
     public function index() {
 
-        $books = Books::with('category', 'editor', 'author')->get();
+        $books = Books::with('category', 'editor', 'author', 'rate')->get();
+
+        /* Calcul de la moyenne */
+        foreach($books as $book) {
+            $comments = $book->rate;
+            $rate = $comments->pluck('rate')->avg();
+            $book['note'] = $rate;
+            unset($book['rate']);
+        }
+
+        $newArray = json_decode($books);
+
+        $laravelArray = collect($newArray);
+
+        $sorted = $laravelArray->sortByDesc('note');
 
         return response()->json([
             'status_code' => 200,
             'status_message' => 'Touts les livres',
-            'livres' => $books
+            'livres' => $sorted
         ]);
 
     }
 
     public function show($id) {
 
-        $book = Books::with('category', 'editor', 'author')->where('id', $id)->get();
+        $book = Books::with('category', 'editor', 'author', 'rate')->where('id', $id)->get();
+
+        $comments = $book->first()->rate;
+
+        $avg = $comments->pluck('rate')->avg();
 
         return response()->json([
             'status_code' => 200,
             'status_message' => 'livres uniques',
-            'livre' => $book
+            'livre' => $book,
+            'average' => $avg
         ]);
     }
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ReadingStatusController;
 use App\Http\Controllers\UserApiAuthetification;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\AuthorStatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,10 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
     /* Controle des status de lecture */
     Route::resource('readingstatus', ReadingStatusController::class);
+
+    /* Route de stats */
+    Route::resource('author', AuthorStatsController::class);
+    Route::get('author/rate', [AuthorStatsController::class, '']);
 });
 
 
