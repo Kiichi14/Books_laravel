@@ -82,14 +82,23 @@ class UserApiAuthetification extends Controller
 
     public function show(Request $request) {
 
-        return response()->json([
-            'status_code' => 200,
-            'status_message' => 'Utilisateur en cours',
-            'user' => $request->user(),
-            'token' => request()->bearerToken(),
-            'role' => Auth::user()->role
-        ]);
 
+        if(Auth::user()) {
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Utilisateur en cours',
+                'connected' => 'true',
+                'user' => $request->user(),
+                'token' => request()->bearerToken(),
+                'role' => Auth::user()->role
+            ]);
+        } else {
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Utilisateur non connecté',
+                'connected' => 'false',
+            ]);
+        }
 
     }
 
