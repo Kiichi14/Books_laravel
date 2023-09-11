@@ -10,6 +10,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ReadingStatusController;
 use App\Http\Controllers\UserApiAuthetification;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,17 @@ use App\Http\Controllers\UserApiAuthetification;
 |
 */
 
+/* Route de test lecture api */
+Route::get('test', [TestController::class, 'test']);
+
 /* Route d'authentification */
 Route::post('register', [UserApiAuthetification::class, 'store']);
 Route::post('login', [UserApiAuthetification::class, 'login']);
 
 /* Route sécurisé par le login de l'application */
 Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::get('users', [UserApiAuthetification::class, 'show']);
     Route::get('logout', [UserApiAuthetification::class, 'logout']);
+    Route::get('users', [UserApiAuthetification::class, 'show']);
 
     /* Controle des livres */
     Route::resource('books', BooksController::class);
