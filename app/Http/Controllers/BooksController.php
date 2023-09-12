@@ -56,7 +56,6 @@ class BooksController extends Controller
     }
 
     public function store(CreateBooksRequest $request) {
-
         $book = new Books();
 
         $input = $request->all();

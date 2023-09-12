@@ -25,7 +25,7 @@ class CreateBooksRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'bail|required',
             'author_id' => 'required',
             'editor_id' => 'required'
         ];
@@ -38,7 +38,7 @@ class CreateBooksRequest extends FormRequest
             'error' => true,
             'message' => 'Erreur de validation',
             'errorList' => $validator->errors()
-        ]));
+        ], 422));
     }
 
     public function messages() {
