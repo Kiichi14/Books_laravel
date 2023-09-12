@@ -32,8 +32,19 @@ class AuthorStatsController extends Controller
 
     }
 
-    public function averageAuthor() {
-        //
+    public function averageAuthor($id) {
+
+        $author = Author::with('books', 'books.category', 'books.editor', 'books.rate')->where('id', $id)->get();
+
+        $rate = $author->pluck('rate');
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Touts les livres de l\'auteur',
+            'author' => $author,
+            'authorRate' => $rate
+        ]);
+
     }
 
 }

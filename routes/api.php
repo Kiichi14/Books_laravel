@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
 
     /* Route de stats */
     Route::resource('author', AuthorStatsController::class);
-    Route::get('author/rate', [AuthorStatsController::class, '']);
+    Route::get('author/rate/{id}', [AuthorStatsController::class, 'averageAuthor']);
 });
 
 
