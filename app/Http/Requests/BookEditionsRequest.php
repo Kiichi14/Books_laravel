@@ -36,7 +36,7 @@ class BookEditionsRequest extends FormRequest
             'error' => true,
             'message' => 'Erreur de validation',
             'errorList' => $validator->errors()
-        ]));
+        ], 422));
     }
 
     public function messages() {

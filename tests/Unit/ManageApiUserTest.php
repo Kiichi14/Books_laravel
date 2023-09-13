@@ -65,4 +65,5 @@ class ManageApiUserTest extends TestCase
 
         $this->assertGuest();
     }
+
 }
