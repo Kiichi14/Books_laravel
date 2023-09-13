@@ -48,4 +48,21 @@ class ReadingStatusController extends Controller
 
     }
 
+    public function update(Request $request, $id) {
+
+        $input = $request->all();
+
+        $book = ReadingStatus::where('id', $id)->update([
+            'user_id' => $input['user_id'],
+            'edition_id' => $input['edition_id'],
+            'status' => $input['status']
+        ]);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Le statut de lecture a bien été mis a jour',
+        ]);
+
+    }
+
 }

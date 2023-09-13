@@ -40,9 +40,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::resource('books', BooksController::class);
 
     /* Controle des editions */
-    Route::get('editions/all', [EditionsController::class, 'index']);
-    Route::get('editions/{id}', [EditionsController::class, 'find']);
-    Route::post('editions/add', [EditionsController::class, 'store']);
+    Route::resource('editions', EditionsController::class)->middleware('checkrole:admin');
 
     /* Controle par edition de livre */
     Route::resource('book_editions', BookEditionsController::class);

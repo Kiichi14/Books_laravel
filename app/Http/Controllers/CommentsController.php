@@ -9,6 +9,10 @@ use App\Http\Requests\CommentsRequest;
 class CommentsController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('checkrole:admin')->except(['index', 'show', 'store']);
+    }
+
     public function index() {
 
         $comments = Comments::with('book', 'user')->get();
@@ -77,6 +81,18 @@ class CommentsController extends Controller
         return response()->json([
             'status_code' => 200,
             'status_message' => 'Votre commentaire a bien été mis a jour',
+            'book' => $comment
+        ]);
+
+    }
+
+    public function destroy($id) {
+
+        $comment = Comments::where('id', $id)->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Le commentaire a bien été supprimer',
             'book' => $comment
         ]);
 

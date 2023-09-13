@@ -9,6 +9,10 @@ use App\Http\Requests\BookEditionsRequest;
 class BookEditionsController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('checkrole:admin')->except(['index', 'show', 'store', 'findAllBookEdition']);
+    }
+
     public function index() {
 
         $booksEditions = BookEditions::with('book','book.author','book.category', 'editions')->get();
