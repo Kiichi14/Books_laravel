@@ -42,9 +42,9 @@ class WishlistController extends Controller
         ]);
     }
 
-    public function destroy($id) {
+    public function destroy($idUser ,$idBook) {
 
-        $wishlist = Wishlist::where('edition_id', $id)->delete();
+        $wishlist = Wishlist::where([['user_id', $idUser] ,['edition_id', $idBook]])->delete();
 
         return response()->json([
             'status_code' => 200,

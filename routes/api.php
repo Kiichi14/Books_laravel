@@ -54,10 +54,15 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('book/editor/{id}', [BooksController::class, 'searchByEditor']);
 
     /* Controle des bibliothéque */
-    Route::resource('librairy', LibrairyController::class);
+    Route::get('librairy/{id}', [LibrairyController::class, 'show']);
+    Route::post('librairy/add', [LibrairyController::class, 'store']);
+    Route::delete('librairy/delete/{idUser}/{idBook}', [LibrairyController::class, 'destroy']);
 
     /* Controle de la wishlist */
-    Route::resource('wishlist', WishlistController::class);
+    //Route::resource('wishlist', WishlistController::class);
+    Route::get('wishlist/{id}', [WishlistController::class, 'show']);
+    Route::post('wishlist/add', [WishlistController::class, 'store']);
+    Route::delete('wishlist/delete/{idUser}/{idBook}', [WishlistController::class, 'destroy']);
 
     /* Controle des commentaires */
     Route::resource('comments', CommentsController::class);
