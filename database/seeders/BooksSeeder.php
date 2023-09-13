@@ -15,7 +15,7 @@ class BooksSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create();
+        /*$faker = Faker::create();
 
         for($i = 0; $i < 5; $i++) {
             DB::table('books')->insert([
@@ -25,6 +25,8 @@ class BooksSeeder extends Seeder
                 'author_id' => $faker->numberBetween(1, 5),
                 'editor_id' => $faker->numberBetween(1, 5)
             ]);
-        }
+        }*/
+
+        \App\Models\Books::factory(5)->create();
     }
 }
