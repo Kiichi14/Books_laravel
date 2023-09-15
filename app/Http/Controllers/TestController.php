@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class TestController extends Controller
 {
 
+    // methode de test communication api avec front
     public function test() {
 
         return response()->json([

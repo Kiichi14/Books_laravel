@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class EditionsController extends Controller
 {
 
+    // capture de tous les editeur
     public function index() {
 
         $editions = Editions::get();
@@ -20,6 +21,7 @@ class EditionsController extends Controller
 
     }
 
+    // capture d'un editeur par son id
     public function show($id) {
 
         $edition = Editions::where('id', $id)->get();
@@ -32,6 +34,7 @@ class EditionsController extends Controller
 
     }
 
+    // ajout d'un nouvel editeur
     public function store(Request $request) {
 
         $edition = new Editions();
@@ -51,6 +54,7 @@ class EditionsController extends Controller
 
     }
 
+    // mise a jour d'un editeur
     public function update(Request $request, $id) {
 
         $input = $request->all();
@@ -68,6 +72,7 @@ class EditionsController extends Controller
 
     }
 
+    // suppression d'un editeur
     public function destroy($id) {
 
         $edition = Editions::where('id', $id)->delete();

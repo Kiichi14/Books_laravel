@@ -9,6 +9,7 @@ use App\Http\Requests\ReadingStatusRequest;
 class ReadingStatusController extends Controller
 {
 
+    // ajout d'un nouveau statut de lecture a une edition possédé par un user
     public function store(ReadingStatusRequest $request) {
 
         $readingStatus = new ReadingStatus();
@@ -28,7 +29,7 @@ class ReadingStatusController extends Controller
 
     }
 
-    /* get status des livres d'un utilisateur */
+    /* cpature du status des livres d'un user */
     public function show($userId) {
 
         $status = ReadingStatus::with('user', 'edition.book', 'edition.book.author', 'edition.book.category')->where('user_id', $userId)->get();
@@ -48,6 +49,7 @@ class ReadingStatusController extends Controller
 
     }
 
+    // mise a jour d'un statut de lecture pour une edition d'un user
     public function update(Request $request, $id) {
 
         $input = $request->all();

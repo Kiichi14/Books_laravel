@@ -21,6 +21,8 @@ class CreateBooksRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+
+    // régle de création d'un livre
     public function rules(): array
     {
         return [
@@ -31,6 +33,7 @@ class CreateBooksRequest extends FormRequest
         ];
     }
 
+    // si erreur de validation on envoie une erreur 422 avec les messages associé aux champs
     public function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json([
             'succes' => false,
@@ -41,6 +44,7 @@ class CreateBooksRequest extends FormRequest
         ], 422));
     }
 
+    // liste des messages
     public function messages() {
         return [
             'name.required' => 'Un titre est requis pour un livre',

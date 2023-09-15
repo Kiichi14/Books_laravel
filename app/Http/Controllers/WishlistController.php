@@ -9,6 +9,7 @@ use App\Http\Requests\LibrairyRequest;
 class WishlistController extends Controller
 {
 
+    // ajout d'un livre dans la liste de souhait d'un user
     public function store(LibrairyRequest $request) {
 
         $wishlist = new Wishlist();
@@ -26,6 +27,7 @@ class WishlistController extends Controller
         ]);
     }
 
+    // capture de la liste de souhait d'un user avec ses relations
     public function show($id) {
 
         $wishlist = Wishlist::with('user', 'editions.book.category', 'editions.book.author', 'editions.editions')->where('user_id', $id)->get();
@@ -42,6 +44,7 @@ class WishlistController extends Controller
         ]);
     }
 
+    // suppression d'un livre dans la liste de souhait d'un user
     public function destroy($idUser ,$idBook) {
 
         $wishlist = Wishlist::where([['user_id', $idUser] ,['edition_id', $idBook]])->delete();

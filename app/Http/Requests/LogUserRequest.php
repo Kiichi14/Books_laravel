@@ -21,6 +21,8 @@ class LogUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+
+    // régle de login d'un user
     public function rules(): array
     {
         return [
@@ -29,6 +31,7 @@ class LogUserRequest extends FormRequest
         ];
     }
 
+    // si erreur de validation on envoie une erreur 422 avec les messages associé aux champs
     public function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json([
             'succes' => false,
@@ -39,6 +42,7 @@ class LogUserRequest extends FormRequest
         ], 422));
     }
 
+    // liste des messages
     public function messages() {
         return [
             'email.required' => 'Merci de remplir le champs mail',

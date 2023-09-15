@@ -9,10 +9,12 @@ use App\Http\Requests\BookEditionsRequest;
 class BookEditionsController extends Controller
 {
 
+    /* Mise en place du middleware pour bloquer les méthodes update, destroy */
     public function __construct() {
         $this->middleware('checkrole:admin')->except(['index', 'show', 'store', 'findAllBookEdition']);
     }
 
+    /* Capture de tous les editions livres avec leur auteur, categorie, editeur */
     public function index() {
 
         $booksEditions = BookEditions::with('book','book.author','book.category', 'editions')->get();
@@ -25,6 +27,7 @@ class BookEditionsController extends Controller
 
     }
 
+    /* Capture d'une edition de livre par son id avec ses relations */
     public function show($id) {
 
         $bookEdition = BookEditions::with('book','book.author','book.category', 'editions')
@@ -38,6 +41,7 @@ class BookEditionsController extends Controller
         ]);
     }
 
+    /* Ajout d'une edition */
     public function store(BookEditionsRequest $request) {
 
         $bookEdition = new BookEditions();
@@ -57,6 +61,7 @@ class BookEditionsController extends Controller
 
     }
 
+    /* Mise a jour d'une editions */
     public function update(BookEditionsRequest $request, $id) {
 
         $input = $request->all();
@@ -74,6 +79,7 @@ class BookEditionsController extends Controller
 
     }
 
+    /* Supression d'une edition */
     public function destroy($id) {
 
         $bookEdition = BookEditions::where('id', $id)->delete();
@@ -86,6 +92,7 @@ class BookEditionsController extends Controller
 
     }
 
+    /* Capture d'un livres et toutes ces editions disponible */
     public function findAllBookEdition($id) {
 
         $booksEditions = BookEditions::with('book','book.author','book.category', 'editions')

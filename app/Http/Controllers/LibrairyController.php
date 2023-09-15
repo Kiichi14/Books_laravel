@@ -9,6 +9,7 @@ use App\Http\Requests\LibrairyRequest;
 class LibrairyController extends Controller
 {
 
+    // ajout d'un livre dans la bibliothéque d'un user
     public function store(LibrairyRequest $request) {
 
         $librairy = new Librairy();
@@ -27,6 +28,7 @@ class LibrairyController extends Controller
 
     }
 
+    // Capture de la bibliothéque d'un user avec toutes ses relations
     public function show($id) {
 
         $librairy = Librairy::with('user', 'editions.book.category', 'editions.book.author', 'editions.editions')->where('user_id', $id)->get();
@@ -44,6 +46,7 @@ class LibrairyController extends Controller
 
     }
 
+    // suppression d'un livre dans la bibliothéque d'un user
     public function destroy($idUser, $idBook) {
 
         $librairy = Librairy::where([['user_id', $idUser], ['edition_id', $idBook]])->delete();

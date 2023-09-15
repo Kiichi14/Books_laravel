@@ -9,10 +9,12 @@ use App\Http\Requests\CommentsRequest;
 class CommentsController extends Controller
 {
 
+    /* Mise en place du middleware pour bloquer les méthodes update, destroy */
     public function __construct() {
         $this->middleware('checkrole:admin')->except(['index', 'show', 'store']);
     }
 
+    // Capture de tous les commentaires avec leurs relations
     public function index() {
 
         $comments = Comments::with('book', 'user')->get();
@@ -25,6 +27,7 @@ class CommentsController extends Controller
 
     }
 
+    // ajout d'un commentaire
     public function store(CommentsRequest $request) {
 
         $comment = new Comments();
@@ -45,6 +48,7 @@ class CommentsController extends Controller
 
     }
 
+    // capture des comentaires d'un seul livre
     public function show($book_id) {
 
         $comments = Comments::with('user', 'book', 'book.author', 'book.category')->where('book_id', $book_id)->get();
@@ -67,6 +71,7 @@ class CommentsController extends Controller
 
     }
 
+    // mise a jour d'un commentaire
     public function update(CommentsRequest $request, $id) {
 
         $input = $request->all();
@@ -86,6 +91,7 @@ class CommentsController extends Controller
 
     }
 
+    // suppression d'un commentaire
     public function destroy($id) {
 
         $comment = Comments::where('id', $id)->delete();

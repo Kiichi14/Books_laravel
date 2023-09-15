@@ -21,6 +21,8 @@ class CreateUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+
+    // régle de création d'un user
     public function rules(): array
     {
         return [
@@ -30,6 +32,7 @@ class CreateUserRequest extends FormRequest
         ];
     }
 
+    // si erreur de validation on envoie une erreur 422 avec les messages associé aux champs
     public function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json([
             'succes' => false,
@@ -40,6 +43,7 @@ class CreateUserRequest extends FormRequest
         ], 422));
     }
 
+    // liste des messages
     public function messages() {
         return [
             'name.required' => 'Un Nom pour l\'utilisateur est requis',

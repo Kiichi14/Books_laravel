@@ -21,6 +21,8 @@ class BookEditionsRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
+
+    // régle d'ajout d'une edition de livre
     public function rules(): array
     {
         return [
@@ -29,6 +31,7 @@ class BookEditionsRequest extends FormRequest
         ];
     }
 
+    // si erreur de validation on envoie une erreur 422 avec les messages associé aux champs
     public function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json([
             'succes' => false,
@@ -39,6 +42,7 @@ class BookEditionsRequest extends FormRequest
         ], 422));
     }
 
+    // liste des messages
     public function messages() {
         return [
             'book_id.required' => 'Un livre est requis pour ajouter une nouvel édition',

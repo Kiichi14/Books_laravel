@@ -8,6 +8,7 @@ use App\Models\Author;
 class AuthorStatsController extends Controller
 {
 
+    /* Capture de tous le auteurs */
     public function index() {
 
         $authors = Author::get();
@@ -20,6 +21,7 @@ class AuthorStatsController extends Controller
 
     }
 
+    /* Capture d'un auteur par son id */
     public function show($id) {
 
         $author = Author::where('id', $id)->get();
@@ -32,6 +34,7 @@ class AuthorStatsController extends Controller
 
     }
 
+    /* Moyenne de tous le livres d'un auteur */
     public function averageAuthor($id) {
 
         $author = Author::with('books', 'books.category', 'books.editor', 'books.rate')->where('id', $id)->get();

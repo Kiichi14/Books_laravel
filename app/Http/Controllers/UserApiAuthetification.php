@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserApiAuthetification extends Controller
 {
-
+    /* enregistrement d'un utilisateur */
     public function store(CreateUserRequest $request) {
 
         $user = new User();
@@ -39,6 +39,7 @@ class UserApiAuthetification extends Controller
 
     }
 
+    /* Connexion d'un utilisateur */
     public function login(LogUserRequest $request) {
 
         if(auth()->attempt($request->only(['email', 'password']))){
@@ -67,6 +68,7 @@ class UserApiAuthetification extends Controller
 
     }
 
+    /* Deconnexion de l'utilisateur */
     public function logout() {
 
         /** @var \App\Models\MyUserModel $user **/
@@ -80,6 +82,7 @@ class UserApiAuthetification extends Controller
 
     }
 
+    /* Récupération de l'utilisateur */
     public function show(Request $request) {
 
             return response()->json([

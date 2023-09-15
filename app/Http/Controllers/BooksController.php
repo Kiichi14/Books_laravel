@@ -9,10 +9,12 @@ use App\Http\Requests\CreateBooksRequest;
 class BooksController extends Controller
 {
 
+    /* Mise en place du middleware pour bloquer les méthodes store update, destroy */
     public function __construct() {
         $this->middleware('checkrole:admin')->except(['index', 'show', 'searchByauthor', 'searchByEditor']);
     }
 
+    /* Capture de tous les livres avec leurs relations */
     public function index() {
 
         $books = Books::with('category', 'editor', 'author', 'rate')->get();
@@ -39,6 +41,7 @@ class BooksController extends Controller
 
     }
 
+    /* Capture d'un livre par son id avec ses relations */
     public function show($id) {
 
         $book = Books::with('category', 'editor', 'author', 'rate')->where('id', $id)->get();
@@ -55,6 +58,7 @@ class BooksController extends Controller
         ]);
     }
 
+    /* Ajout d'un livre */
     public function store(CreateBooksRequest $request) {
         $book = new Books();
 
@@ -76,6 +80,7 @@ class BooksController extends Controller
 
     }
 
+    /* Mise a jour d'un livre */
     public function update(CreateBooksRequest $request, $id) {
 
         $input = $request->all();
@@ -96,6 +101,7 @@ class BooksController extends Controller
 
     }
 
+    /* Suppression d'un livre */
     public function destroy($id) {
 
         $book = Books::where('id', $id)->delete();
@@ -109,7 +115,7 @@ class BooksController extends Controller
     }
 
     /* Méthode de recherche */
-
+    // recherche par auteur
     public function searchByauthor($idAuthor) {
 
         $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('author_id', $idAuthor)->get();
@@ -122,6 +128,7 @@ class BooksController extends Controller
 
     }
 
+    // recherche par catégorie
     public function searchByCategory($idCategory) {
 
         $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('category_id', $idCategory)->get();
@@ -134,6 +141,7 @@ class BooksController extends Controller
 
     }
 
+    // recherche par editeur
     public function searchByEditor($idEditor) {
 
         $books = Books::with('category', 'editor', 'author', 'editions.editions')->where('editor_id', $idEditor)->get();
