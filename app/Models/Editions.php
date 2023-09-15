@@ -11,9 +11,14 @@ class Editions extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function editions(): HasMany
     {
         return $this->hasMany(BookEditions::class, 'edition_id', 'id');
     }
-    
+
 }

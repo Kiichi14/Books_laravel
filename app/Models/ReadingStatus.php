@@ -10,6 +10,13 @@ class ReadingStatus extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'user_id',
+        'edition_id'
+    ];
+
     protected $table = 'reading_status';
 
     public function user(): HasOne

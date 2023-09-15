@@ -10,6 +10,11 @@ class Comments extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'user_id',
+        'book_id',
+    ];
+
     public function book(): HasOne
     {
         return $this->hasOne(Books::class, 'id', 'book_id');

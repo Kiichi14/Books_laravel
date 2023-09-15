@@ -10,6 +10,13 @@ class BookEditions extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'book_id',
+        'edition_id'
+    ];
+
     public function book()
     {
         return $this->belongsTo(Books::class, 'book_id', 'id');
@@ -28,5 +35,10 @@ class BookEditions extends Model
     public function wishlist(): HasMany
     {
         return $this->hasMany(Wishlist::class, 'edition_id', 'id');
+    }
+
+    public function readingStatus(): HasMany
+    {
+        return $this->hasMany(ReadingStatus::class, 'edition_id', 'id');
     }
 }
