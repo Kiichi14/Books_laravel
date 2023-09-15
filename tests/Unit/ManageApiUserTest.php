@@ -19,6 +19,7 @@ class ManageApiUserTest extends TestCase
         $this->assertTrue(true);
     }
 
+    // test all use can connect
     public function test_all_user_can_register(): void
     {
         $response = $this->post('/api/register', [
@@ -30,6 +31,7 @@ class ManageApiUserTest extends TestCase
         $response->assertOk();
     }
 
+    // test api connect
     public function test_user_api_connect(): void
     {
         $user = User::factory()->create();
@@ -42,6 +44,7 @@ class ManageApiUserTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    // test connect with wrong password
     public function test_user_cannot_connect_with_wrong_password(): void
     {
         $user = User::factory()->create();
@@ -54,6 +57,7 @@ class ManageApiUserTest extends TestCase
         $this->assertGuest();
     }
 
+    // test connect with wrong email
     public function test_user_cannot_connect_with_wrong_email(): void
     {
         $user = User::factory()->create();
