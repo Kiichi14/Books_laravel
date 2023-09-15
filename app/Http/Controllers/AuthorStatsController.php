@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Author;
-use App\Models\Books;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class AuthorStatsController extends Controller
@@ -58,11 +57,12 @@ class AuthorStatsController extends Controller
 
     }
 
-    /* Nombre de livre en cours de lecture */
+    /* Nombre de livre en cours de lecture (non finie) */
     public function bookInRead($idAuthor) {
 
         $author = Author::with('books')
         ->whereRelation('books.editions.readingStatus', 'status', 'En cours de lecture')
+        ->where('id', $idAuthor)
         ->get();
 
         $number = count($author);
