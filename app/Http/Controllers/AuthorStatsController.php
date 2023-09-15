@@ -39,13 +39,19 @@ class AuthorStatsController extends Controller
 
         $author = Author::with('books', 'books.category', 'books.editor', 'books.rate')->where('id', $id)->get();
 
-        $rate = $author->pluck('rate');
+        $book = $author->first()->books;
+
+        $rate = $book->pluck('rate');
+
+        foreach($rate as $rateAvg) {
+            $average = $rateAvg->pluck('rate')->avg();
+        }
 
         return response()->json([
             'status_code' => 200,
             'status_message' => 'Touts les livres de l\'auteur',
             'author' => $author,
-            'authorRate' => $rate
+            'authorRate' => $average
         ]);
 
     }

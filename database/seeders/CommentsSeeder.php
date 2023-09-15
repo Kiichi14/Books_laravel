@@ -20,7 +20,7 @@ class CommentsSeeder extends Seeder
         for($i = 0; $i < 5; $i++) {
             DB::table('comments')->insert([
                 'rate' => $faker->numberBetween(1, 10),
-                'user_id' => $faker->numberBetween(1, 3),
+                'user_id' => 1,
                 'book_id' => $faker->numberBetween(1, 5),
                 'comment' => $faker->paragraph()
             ]);

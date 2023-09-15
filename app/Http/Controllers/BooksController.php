@@ -14,7 +14,7 @@ class BooksController extends Controller
         $this->middleware('checkrole:admin')->except(['index', 'show', 'searchByauthor', 'searchByEditor']);
     }
 
-    /* Capture de tous les livres avec leurs relations */
+    /* Capture de tous les livres avec leurs relations et classement par note */
     public function index() {
 
         $books = Books::with('category', 'editor', 'author', 'rate')->get();
