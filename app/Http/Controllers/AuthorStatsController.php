@@ -58,19 +58,19 @@ class AuthorStatsController extends Controller
 
     }
 
-    /* Nombre de livre en cours de lecture (non finie) */
+    /* Nombre de livre en cours de lecture */
     public function bookInRead($idAuthor) {
 
-        $author = Books::with('author', 'editions.readingStatus')
-        ->whereRelation('editions.readingStatus', 'status', 'En cours de lecture')
-        ->where('author_id', $idAuthor)
+        $author = Author::with('books')
+        ->whereRelation('books.editions.readingStatus', 'status', 'En cours de lecture')
         ->get();
+
+        $number = count($author);
 
         return response()->json([
             'status_code' => 200,
             'status_message' => 'Livre en cours de lecture',
-            'livre' => $author,
-            'nombre de livre' => ''
+            'nombre de livre' => $number
         ]);
 
     }
